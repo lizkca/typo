@@ -4,6 +4,17 @@ describe Admin::ContentController do
   render_views
 
   # Like it's a shared, need call everywhere
+  describe 'merge article' do
+    it 'should call the model method that performs merge' do
+      fake_results = [mock('article1'), mock('movie2')]
+      Article.should_receive(:merge_article).with('hardware').
+        and_return (fake_results)
+      post :merge_article, {:merge_article  => 'hardware'}
+    end
+    it 'should select the merge results template for rendering'
+    it 'should make the merge results available to that template'
+  end
+  
   shared_examples_for 'index action' do
 
     it 'should render template index' do
